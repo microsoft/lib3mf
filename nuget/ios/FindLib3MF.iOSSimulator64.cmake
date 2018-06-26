@@ -8,4 +8,6 @@ if (NOT Lib3MF_IOSSIMULATOR64_FOUND)
     set_target_properties(Lib3MF PROPERTIES IMPORTED_LOCATION_RELEASE "${CMAKE_CURRENT_LIST_DIR}/build/native/lib/iOSSimulator64/Release/static/lib3MF_s.a")
     set_target_properties(Lib3MF PROPERTIES IMPORTED_LOCATION_RELWITHDEBINFO "${CMAKE_CURRENT_LIST_DIR}/build/native/lib/iOSSimulator64/Release/static/lib3MF_s.a")
     set_target_properties(Lib3MF PROPERTIES IMPORTED_LOCATION_MINSIZEREL "${CMAKE_CURRENT_LIST_DIR}/build/native/lib/iOSSimulator64/Release/static/lib3MF_s.a")
+    # Default location for other build configurations defaults to Debug
+    set_target_properties(Lib3MF PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_LIST_DIR}/build/native/lib/iOSSimulator64/Debug/static/lib3MF_s.a")
 endif()
