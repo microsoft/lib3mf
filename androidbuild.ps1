@@ -57,7 +57,7 @@ function GenerateNinjaFiles()
         # A path with back-slash as separator can be passed to cmake via commandline but cannot be used in any cmake file.
         # So, to avoid any confusion changing path separator to forward slash.
         $AndroidToolChain = $AndroidToolChain -replace "\\", "/"
-        cmake ..\..\.. -DANDROID_ABI="$AndroidABI" -DANDROID_PLATFORM="$AndroidPlatform" -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=intermediates -DCMAKE_BUILD_TYPE="$BuildType" -DCMAKE_TOOLCHAIN_FILE="$AndroidToolChain" -DCMAKE_CXX_FLAGS=-fexceptions -DANDROID_STL=c++_static -GNinja -DANDROID_OS_PLATFORM=ANDROID -DLIB3MF_TESTS=FALSE | Write-Host
+        cmake ..\..\.. -DANDROID_ABI="$AndroidABI" -DANDROID_PLATFORM="$AndroidPlatform" -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=intermediates -DCMAKE_BUILD_TYPE="$BuildType" -DCMAKE_TOOLCHAIN_FILE="$AndroidToolChain" -DCMAKE_CXX_FLAGS=-fexceptions -DANDROID_STL=c++_static -GNinja -DANDROID_OS_PLATFORM=ANDROID -DLIB3MF_TESTS=TRUE | Write-Host
     }
     finally
     {
