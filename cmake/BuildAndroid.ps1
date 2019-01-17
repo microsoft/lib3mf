@@ -36,9 +36,9 @@ function GenerateNinjaFiles()
     $AndroidABI = findABI
     $BuildDirName = getBuildDirName
     Write-Host "Generating Android ninja files for $AndroidABI"
-    New-Item -Path "$PSScriptRoot\build" -Name $BuildDirName -ItemType Directory -Force | Out-Null
-	New-Item -Path "$PSScriptRoot\build\$BuildDirName" -Name $BuildType -ItemType Directory -Force | Out-Null
-    Push-Location "$PSScriptRoot\build\$BuildDirName\$BuildType" | Out-Null
+    New-Item -Path "$PSScriptRoot\..\build" -Name $BuildDirName -ItemType Directory -Force | Out-Null
+	New-Item -Path "$PSScriptRoot\..\build\$BuildDirName" -Name $BuildType -ItemType Directory -Force | Out-Null
+    Push-Location "$PSScriptRoot\..\build\$BuildDirName\$BuildType" | Out-Null
 
     try
     {
@@ -52,12 +52,12 @@ function GenerateNinjaFiles()
             $AndroidNDKRoot = "$Appdata\..\Local\Android\Sdk\ndk-bundle"
         }
         $AndroidToolChain = "$AndroidNDKRoot\build\cmake\android.toolchain.cmake"
-        $AndroidPlatform = "android-19"
+        $AndroidPlatform = "android-21"
 
         # A path with back-slash as separator can be passed to cmake via commandline but cannot be used in any cmake file.
         # So, to avoid any confusion changing path separator to forward slash.
         $AndroidToolChain = $AndroidToolChain -replace "\\", "/"
-        cmake ..\..\.. -DANDROID_ABI="$AndroidABI" -DANDROID_PLATFORM="$AndroidPlatform" -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=intermediates -DCMAKE_BUILD_TYPE="$BuildType" -DCMAKE_TOOLCHAIN_FILE="$AndroidToolChain" -DCMAKE_CXX_FLAGS=-fexceptions -DANDROID_STL=c++_static -GNinja -DANDROID_OS_PLATFORM=ANDROID -DLIB3MF_TESTS=TRUE | Write-Host
+        cmake ..\..\.. -DANDROID_ABI="$AndroidABI" -DANDROID_PLATFORM="$AndroidPlatform" -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=intermediates -DCMAKE_BUILD_TYPE="$BuildType" -DCMAKE_TOOLCHAIN_FILE="$AndroidToolChain" -DCMAKE_CXX_FLAGS="-fexceptions -DGTEST_HAS_STD_WSTRING" -DANDROID_STL=c++_static -GNinja -DANDROID_OS_PLATFORM=ANDROID -DLIB3MF_TESTS=TRUE | Write-Host
     }
     finally
     {
@@ -68,7 +68,7 @@ function GenerateNinjaFiles()
 function BuildTarget()
 {
     $BuildDirName = getBuildDirName
-    Push-Location "$PSScriptRoot\build\$BuildDirName\$BuildType" | Out-Null
+    Push-Location "$PSScriptRoot\..\build\$BuildDirName\$BuildType" | Out-Null
     try
     {
         cmake --build . --config "$BuildType" | Write-Host
@@ -89,7 +89,6 @@ function cleanTarget()
     # Delete both compilation and installation directories.
     $BuildDirName = getBuildDirName
     Remove-Item "$PSScriptRoot\build\$BuildDirName\$BuildType" -Recurse -Force -ErrorAction Ignore | Write-Host
-    #Remove-Item "$PSScriptRoot\Built\Out\$BuildDirName\$BuildType" -Recurse -Force -ErrorAction Ignore | Write-Host
 }
 
 function findABI()

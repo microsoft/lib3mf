@@ -77,25 +77,25 @@ namespace NMR {
 			S_OK) << L"Failed to check Materials-Spec";
 		EXPECT_TRUE(bIsSupported) << L"Materials-Spec not supported";
 		errString = std::wstring(L"invalid 3MF API interface version for Materials-Spec: " + std::to_wstring(NMR_APIVERSION_INTERFACE_MATERIALSPEC));
-		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_MATERIALSPEC)) << errString.c_str();
+		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_MATERIALSPEC)) << errString;
 
 		EXPECT_EQ(NMR::lib3mf_queryextension(L"http://schemas.microsoft.com/3dmanufacturing/production/2015/06", &bIsSupported, &nAPIInterfaceVersion),
 			S_OK) << L"Failed to check Production-Spec";
 		EXPECT_TRUE(bIsSupported) << L"Production-Spec not supported";
 		errString = std::wstring(L"invalid 3MF API interface version for Production-Spec: " + std::to_wstring(NMR_APIVERSION_INTERFACE_PRODUCTIONSEPC));
-		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_PRODUCTIONSEPC)) << errString.c_str();
+		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_PRODUCTIONSEPC)) << errString;
 
 		EXPECT_EQ(NMR::lib3mf_queryextension(L"http://schemas.microsoft.com/3dmanufacturing/slice/2015/07", &bIsSupported, &nAPIInterfaceVersion),
 			S_OK) << L"Failed to check Slice-Spec";
 		EXPECT_TRUE(bIsSupported) << L"Slice-Spec not supported";
 		errString = std::wstring(L"invalid 3MF API interface version for Production-Spec: " + std::to_wstring(NMR_APIVERSION_INTERFACE_SLICESPEC));
-		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_SLICESPEC)) << errString.c_str();
+		EXPECT_EQ(nAPIInterfaceVersion, (DWORD)(NMR_APIVERSION_INTERFACE_SLICESPEC)) << errString;
 		
 		EXPECT_EQ(NMR::lib3mf_queryextension(L"http://schemas.microsoft.com/3dmanufacturing/beamlattice/2017/02", &bIsSupported, &nAPIInterfaceVersion),
 			S_OK) << L"Failed to check Beam-Spec";
 		EXPECT_TRUE(bIsSupported) << L"Beam-Spec not supported";
 		errString = std::wstring(L"invalid 3MF API interface version for BeamLattice-Spec: " + std::to_wstring(NMR_APIVERSION_INTERFACE_BEAMLATTICESPEC));
-		EXPECT_EQ(nAPIInterfaceVersion,(DWORD)(NMR_APIVERSION_INTERFACE_BEAMLATTICESPEC)) << errString.c_str();
+		EXPECT_EQ(nAPIInterfaceVersion,(DWORD)(NMR_APIVERSION_INTERFACE_BEAMLATTICESPEC)) << errString;
 	}
 
 	TEST(Extensions, RequiredExtensions_Pass)
